@@ -241,6 +241,8 @@ EOF'
 
  HTML file created at `/var/www/html/index.html`.
 
+ ![alt text](image-6.png)
+
 ## Summary
 
 Here's a quick overview of everything that was created:
@@ -253,5 +255,6 @@ Here's a quick overview of everything that was created:
 | Launch Template  | `web-app-launch-template`  | lt-0d76cf328bc05d526 (v3)                 |
 | Auto Scaling Group | `web-app-asg`            | Min: 1 / Desired: 2 / Max: 5             |
 | Scaling Policy   | `scale-out-cpu`            | Target tracking at 70% average CPU       |
+| Simple Webpage Running  | `html webpage`            | Simple Webpage live at http://3.85.212.203/      |
 
 Everything is up and running in **us-east-1 (N. Virginia)** on the **MontyIIT** account.
