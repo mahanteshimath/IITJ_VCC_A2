@@ -18,6 +18,8 @@ I attached three policies to it:
 
 **Role ARN:** `arn:aws:iam::783330586370:instance-profile/EC2-ReadOnly-Role`
 
+
+![alt text](image.png)
 ---
 
 ## Step 2 — Setting Up a Security Group
@@ -34,6 +36,8 @@ Next, I created a security group under **EC2 → Security Groups** to control wh
 
 Restricting SSH to just my IP is a simple but important security step — no need to leave that open to the world.
 
+
+![alt text](image-1.png)
 ---
 
 ## Step 3 — Launching the EC2 Instance
@@ -49,6 +53,7 @@ With the role and security group ready, I launched an EC2 instance from **EC2 �
 - **Storage:** 20 GiB gp3
 - **IAM Role:** `EC2-ReadOnly-Role` attached so it can access S3, CloudWatch, and SSM
 
+![alt text](image-2.png)
 ---
 
 ## Step 4 — Creating a Launch Template
@@ -74,7 +79,7 @@ aws ec2 create-launch-template-version \
   --launch-template-data '{"ImageId":"ami-0f3caa1cf4417e51b"}' \
   --region us-east-1
 ```
-
+![alt text](image-3.png)
 ---
 
 ## Step 5 — Auto Scaling Group with CPU-Based Scaling
@@ -99,7 +104,7 @@ A few details on the policy:
 - Scale-in is enabled, so instances are cleaned up when they're no longer needed
 - New instances get a **300-second warm-up** before they're counted in scaling decisions
 - AWS automatically created two CloudWatch alarms: one to trigger scale-out (AlarmHigh) and one for scale-in (AlarmLow)
-
+![alt text](image-4.png)
 ---
 
 ## Summary
