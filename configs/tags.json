@@ -1,0 +1,28 @@
+[
+  {
+    "_comment": "Standard tags applied to every resource in this project. Keeping them consistent makes cost attribution and cleanup a lot easier.",
+
+    "Key": "Project",
+    "Value": "AutoScalingDemo"
+  },
+  {
+    "Key": "Environment",
+    "Value": "Production"
+  },
+  {
+    "Key": "Owner",
+    "Value": "MontyIIT"
+  },
+  {
+    "Key": "Region",
+    "Value": "us-east-1"
+  },
+  {
+    "Key": "ManagedBy",
+    "Value": "deploy.sh"
+  },
+  {
+    "Key": "CostCenter",
+    "Value": "VCC-Assignment2"
+  }
+]

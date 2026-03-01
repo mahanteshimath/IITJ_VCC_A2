@@ -1,0 +1,34 @@
+{
+  "_comment": "Auto Scaling Group configuration reference. The actual ASG is created by deploy.sh using these values. Keeping them here makes it easy to review or re-apply settings without digging through the script.",
+
+  "AutoScalingGroupName": "web-app-asg",
+  "LaunchTemplate": {
+    "LaunchTemplateName": "web-app-launch-template",
+    "Version": "$Latest"
+  },
+
+  "MinSize": 1,
+  "MaxSize": 5,
+  "DesiredCapacity": 2,
+
+  "AvailabilityZones": [
+    "us-east-1a",
+    "us-east-1b",
+    "us-east-1c"
+  ],
+
+  "HealthCheckType": "EC2",
+  "HealthCheckGracePeriod": 300,
+
+  "TerminationPolicies": [
+    "OldestInstance"
+  ],
+
+  "NewInstancesProtectedFromScaleIn": false,
+
+  "Tags": [
+    { "Key": "Name",        "Value": "web-app-asg",   "PropagateAtLaunch": true },
+    { "Key": "Environment", "Value": "Production",     "PropagateAtLaunch": true },
+    { "Key": "Project",     "Value": "AutoScalingDemo","PropagateAtLaunch": true }
+  ]
+}

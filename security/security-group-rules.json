@@ -1,0 +1,43 @@
+{
+  "_comment": "firewall rules for web-app-sg. the main thing here is keeping ssh locked to my ip — 0.0.0.0/0 on port 22 is how most accounts get popped. http/https are open because it's a public-facing server.",
+
+  "GroupName": "web-app-sg",
+  "GroupId": "sg-07dc43887d2d72637",
+  "Description": "Firewall for web application EC2 instances",
+
+  "InboundRules": [
+    {
+      "RuleId": "ssh-admin-only",
+      "Protocol": "tcp",
+      "Port": 22,
+      "Source": "205.254.163.5/32",
+      "Description": "SSH — my current IP only. if your IP changes you'll need to update this rule.",
+      "Rationale": "opening port 22 to the world is probably the most common way aws accounts get compromised. even locking it to one IP is dramatically better than 0.0.0.0/0."
+    },
+    {
+      "RuleId": "http-public",
+      "Protocol": "tcp",
+      "Port": 80,
+      "Source": "0.0.0.0/0",
+      "Description": "HTTP — open to everyone.",
+      "Rationale": "needed for normal web traffic. also if we add a load balancer later, it'll use port 80 for health checks by default."
+    },
+    {
+      "RuleId": "https-public",
+      "Protocol": "tcp",
+      "Port": 443,
+      "Source": "0.0.0.0/0",
+      "Description": "HTTPS — open to everyone.",
+      "Rationale": "once a cert is installed the server can serve https with no extra firewall changes. better to have this open from the start."
+    }
+  ],
+
+  "OutboundRules": [
+    {
+      "Protocol": "-1",
+      "Port": "All",
+      "Destination": "0.0.0.0/0",
+      "Description": "all outbound allowed — default aws behaviour. instances need this to reach s3, ssm endpoints, and yum/dnf package mirrors."
+    }
+  ]
+}

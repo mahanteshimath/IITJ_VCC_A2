@@ -1,0 +1,17 @@
+{
+  "_comment": "Target tracking scaling policy for web-app-asg. AWS automatically creates two CloudWatch alarms from this — one to scale out when CPU is high, one to scale in when it drops back down. You don't need to manage the alarms manually.",
+
+  "PolicyName": "scale-out-cpu",
+  "PolicyType": "TargetTrackingScaling",
+  "EstimatedInstanceWarmup": 300,
+
+  "TargetTrackingConfiguration": {
+    "PredefinedMetricSpecification": {
+      "PredefinedMetricType": "ASGAverageCPUUtilization"
+    },
+
+    "TargetValue": 70.0,
+
+    "DisableScaleIn": false
+  }
+}

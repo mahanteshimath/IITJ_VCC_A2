@@ -1,0 +1,51 @@
+{
+  "_comment": "Launch template data for web-app-launch-template. These values mirror what's in deploy.sh so the CLI and console stay in sync. Update ImageId here when you roll a new AMI.",
+
+  "ImageId": "ami-0f3caa1cf4417e51b",
+  "InstanceType": "t2.micro",
+  "KeyName": "my-ec2-keypair",
+
+  "SecurityGroupIds": [
+    "sg-07dc43887d2d72637"
+  ],
+
+  "IamInstanceProfile": {
+    "Name": "EC2-ReadOnly-Role"
+  },
+
+  "BlockDeviceMappings": [
+    {
+      "DeviceName": "/dev/xvda",
+      "Ebs": {
+        "VolumeSize": 20,
+        "VolumeType": "gp3",
+        "DeleteOnTermination": true,
+        "Encrypted": false
+      }
+    }
+  ],
+
+  "MetadataOptions": {
+    "HttpTokens": "optional",
+    "HttpEndpoint": "enabled"
+  },
+
+  "TagSpecifications": [
+    {
+      "ResourceType": "instance",
+      "Tags": [
+        { "Key": "Name",        "Value": "web-app-asg-instance" },
+        { "Key": "Environment", "Value": "Production" },
+        { "Key": "Project",     "Value": "AutoScalingDemo" },
+        { "Key": "ManagedBy",   "Value": "AutoScaling" }
+      ]
+    },
+    {
+      "ResourceType": "volume",
+      "Tags": [
+        { "Key": "Name",        "Value": "web-app-root-volume" },
+        { "Key": "Environment", "Value": "Production" }
+      ]
+    }
+  ]
+}

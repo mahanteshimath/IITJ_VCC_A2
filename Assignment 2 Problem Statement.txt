@@ -1,0 +1,23 @@
+
+Use AWS  to Create a VM to Leverage Auto Scaling and Security
+
+Objective:
+
+Set up a virtual machine in a Cloud Platform, implement auto-scaling policies based on workload, and configure security measures like firewall rules and IAM.
+
+Deliverables:
+
+
+1. Document Report:
+    Step-by-Step Instructions for Implementation:
+    Creation of a VM instance on GCP.
+    Configuration of auto-scaling policies (e.g., increase or decrease instances based on CPU utilization).
+    Implementation of security measures such as:
+        Setting up IAM roles for restricted access.
+        Configuring firewall rules to allow/deny traffic.
+
+2. Architecture Design:
+    Diagram showing the VM setup, auto-scaling configuration, and security policies applied.
+ 
+3. Link to Source Code Repo:
+    Repository containing any deployment scripts or configurations used.

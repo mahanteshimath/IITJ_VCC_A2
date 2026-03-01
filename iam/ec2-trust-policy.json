@@ -1,0 +1,15 @@
+{
+  "_comment": "trust policy for EC2-ReadOnly-Role — only ec2 can assume this role, nothing else. that means lambda, ecs, or anything else can't accidentally inherit these permissions.",
+
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowEC2ToAssumeRole",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "ec2.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
