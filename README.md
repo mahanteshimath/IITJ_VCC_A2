@@ -111,8 +111,7 @@ A few details on the policy:
 
 ![alt text](image-5.png)
 
-![alt text](VCC2-ARCH.png)
-
+![alt text](Vcc2.png)
 ## Web Server Deployment 
 
 ![alt text](image-7.png)
