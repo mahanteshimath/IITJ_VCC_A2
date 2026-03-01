@@ -115,6 +115,8 @@ A few details on the policy:
 
 ## Web Server Deployment 
 
+![alt text](image-7.png)
+
 ### Step 1: Security Group Update
 
 **Command:**
