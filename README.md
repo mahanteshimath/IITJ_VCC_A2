@@ -107,6 +107,140 @@ A few details on the policy:
 ![alt text](image-4.png)
 ---
 
+## Architecture
+
+![alt text](image-5.png)
+
+![alt text](VCC2-ARCH.png)
+
+## Web Server Deployment 
+
+### Step 1: Security Group Update
+
+**Command:**
+
+```bash
+aws ec2 authorize-security-group-ingress \
+  --group-id sg-07dc43887d2d72637 \
+  --protocol tcp \
+  --port 22 \
+  --cidr 18.206.107.24/29 \
+  --region us-east-1
+```
+
+**Purpose:** Added EC2 Instance Connect IP range to enable browser-based SSH access.
+
+**Result:**  Rule added successfully.
+
+### Step 2: Connect to EC2 Instance
+
+**Method:** EC2 Instance Connect (browser-based SSH)
+
+**Connection details:**
+- **Instance:** `i-01db3707448940ea5` (`web-app-vm`)
+- **Public IP:** `3.85.212.203`
+- **Username:** `ec2-user`
+- **Connection Type:** Public IP
+
+**Result:** Successfully connected to instance terminal.
+
+### Step 3: Install Apache Web Server
+
+**Command executed:**
+
+```bash
+# Install Apache HTTP Server
+sudo yum install httpd -y
+```
+
+**Output:**
+
+```text
+Package httpd-2.4.66-1.amzn2023.0.1.x86_64 is already installed.
+Dependencies resolved.
+Nothing to do.
+Complete!
+```
+
+**Note:** Apache was already installed (from a previous SSM command attempt).
+
+### Step 4: Start and Enable Apache Service
+
+**Commands executed:**
+
+```bash
+sudo systemctl start httpd
+sudo systemctl enable httpd
+sudo systemctl status httpd --no-pager
+```
+
+**Service status:**
+
+```text
+● httpd.service - The Apache HTTP Server
+   Loaded: loaded (/usr/lib/systemd/system/httpd.service; enabled; preset: disabled)
+   Active: active (running) since Sun 2026-03-01 11:44:04 UTC; 7min ago
+   Main PID: 4454 (httpd)
+   Status: "Total requests: 0; Idle/Busy workers 100/0; Requests/sec: 0; Bytes served/sec: 0 B/sec"
+```
+
+**Result:**  Apache is running and listening on port 80.
+
+### Step 5: Create Custom HTML Page
+
+**Command:**
+
+```bash
+sudo bash -c 'cat > /var/www/html/index.html << EOF
+<html>
+<head><title>My AWS Web App</title>
+<style>
+  body {
+    font-family: Arial;
+    background: #0f1923;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+  }
+  h1 {
+    color: #ff9900;
+    font-size: 3em;
+    margin: 0;
+  }
+  p {
+    font-size: 1.3em;
+    color: #aaa;
+  }
+  .badge {
+    background: #ff9900;
+    color: black;
+    padding: 10px 25px;
+    border-radius: 20px;
+    margin: 8px;
+    display: inline-block;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+  <h1>🎉 My Web App is LIVE! 🎉</h1>
+  <p>Running on AWS EC2 - Auto Scaling Enabled</p>
+  <div>
+    <span class="badge">VM: web-app-vm</span>
+    <span class="badge">Region: us-east-1</span>
+    <span class="badge">Auto Scaling: Active</span>
+  </div>
+</body>
+</html>
+EOF'
+```
+
+ HTML file created at `/var/www/html/index.html`.
+
 ## Summary
 
 Here's a quick overview of everything that was created:
